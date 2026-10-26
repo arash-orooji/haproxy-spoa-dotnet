@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using System;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
@@ -20,7 +21,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             // type 9 = 10010000
             // length 7 = 11100000
             // foo=bar: 01100110111101101111011010111100010001101000011001001110
-            Assert.AreEqual("100100001110000001100110111101101111011010111100010001101000011001001110", ToBitString(bytes));
+            ClassicAssert.AreEqual("100100001110000001100110111101101111011010111100010001101000011001001110", ToBitString(bytes));
         }
         
         [Test]
@@ -33,7 +34,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             byte[] bytes = data.Bytes;
 
             // assert
-            Assert.AreEqual("0001000011000000100001100100011011000110", ToBitString(bytes));
+            ClassicAssert.AreEqual("0001000011000000100001100100011011000110", ToBitString(bytes));
         }
 
         [Test]
@@ -46,7 +47,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             byte[] bytes = data.Bytes;
 
             // assert
-            Assert.AreEqual("1110000000111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100", ToBitString(bytes));
+            ClassicAssert.AreEqual("1110000000111111000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100", ToBitString(bytes));
         }
 
         [Test]
@@ -59,7 +60,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             byte[] bytes = data.Bytes;
 
             // assert
-            Assert.AreEqual("0110000010000000100000001000000010000000", ToBitString(bytes));
+            ClassicAssert.AreEqual("0110000010000000100000001000000010000000", ToBitString(bytes));
         }
 
         [Test]
@@ -72,7 +73,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             byte[] bytes = data.Bytes;
 
             // assert
-            Assert.AreEqual("10001000", ToBitString(bytes));
+            ClassicAssert.AreEqual("10001000", ToBitString(bytes));
         }
 
         [Test]
@@ -85,7 +86,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             byte[] bytes = data.Bytes;
 
             // assert
-            Assert.AreEqual("01000000001111110000111101100000", ToBitString(bytes));
+            ClassicAssert.AreEqual("01000000001111110000111101100000", ToBitString(bytes));
         }
 
         [Test]
@@ -98,7 +99,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             byte[] bytes = data.Bytes;
 
             // assert
-            Assert.AreEqual("11000000001111110000111101100000", ToBitString(bytes));
+            ClassicAssert.AreEqual("11000000001111110000111101100000", ToBitString(bytes));
         }
 
         [TestCase(true, "true")]
@@ -112,7 +113,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             string result = data.ToString();
 
             // assert
-            Assert.AreEqual(expectedResult, result);
+            ClassicAssert.AreEqual(expectedResult, result);
         }
 
         private static string ToBitString(byte[] buffer)

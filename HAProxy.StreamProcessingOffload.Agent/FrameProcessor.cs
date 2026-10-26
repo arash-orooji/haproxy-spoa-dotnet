@@ -440,7 +440,7 @@ namespace HAProxy.StreamProcessingOffload.Agent
             }
 
             byte[] buffer = new byte[length];
-            stream.Read(buffer, 0, length);
+            stream.ReadExactly(buffer, 0, length);
             return buffer;
         }
 
@@ -454,7 +454,7 @@ namespace HAProxy.StreamProcessingOffload.Agent
             }
 
             byte[] buffer = new byte[length];
-            await stream.ReadAsync(buffer, 0, length).ConfigureAwait(false);
+            await stream.ReadExactlyAsync(buffer, 0, length).ConfigureAwait(false);
             return buffer;
         }
 
@@ -486,7 +486,7 @@ namespace HAProxy.StreamProcessingOffload.Agent
         private int ParseFrameLength(Stream stream)
         {
             var buffer = new byte[4];
-            int bytesRead = stream.Read(buffer, 0, 4);
+            int bytesRead = stream.ReadAtLeast(buffer, 4, throwOnEndOfStream: false);
 
             return ParseRawFrameLength(bytesRead, buffer);
         }
@@ -494,7 +494,7 @@ namespace HAProxy.StreamProcessingOffload.Agent
         private async ValueTask<int> ParseFrameLengthAsync(Stream stream)
         {
             var buffer = new byte[4];
-            int bytesRead = await stream.ReadAsync(buffer, 0, 4).ConfigureAwait(false);
+            int bytesRead = await stream.ReadAtLeastAsync(buffer, 4, throwOnEndOfStream: false).ConfigureAwait(false);
 
             return ParseRawFrameLength(bytesRead, buffer);
         }

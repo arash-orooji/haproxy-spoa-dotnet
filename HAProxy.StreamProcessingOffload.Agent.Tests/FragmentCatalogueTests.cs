@@ -1,5 +1,6 @@
 using System.Text;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
 {
@@ -23,7 +24,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             // assert
             byte[] resultBytes = catalogue.Pop(1, 1);
             string result = Encoding.ASCII.GetString(resultBytes);
-            Assert.AreEqual("abc", result);
+            ClassicAssert.AreEqual("abc", result);
         }
 
         [Test]
@@ -50,11 +51,11 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             // assert
             byte[] resultBytes = catalogue.Pop(1, 1);
             string result = Encoding.ASCII.GetString(resultBytes);
-            Assert.AreEqual("abc", result);
+            ClassicAssert.AreEqual("abc", result);
 
             byte[] resultBytes2 = catalogue.Pop(1, 2);
             string result2 = Encoding.ASCII.GetString(resultBytes2);
-            Assert.AreEqual("def", result2);
+            ClassicAssert.AreEqual("def", result2);
         }
 
         [Test]
@@ -73,7 +74,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             // assert
             byte[] resultBytes2 = catalogue.Pop(1, 1); // b
             string result2 = Encoding.ASCII.GetString(resultBytes2);
-            Assert.AreEqual("b", result2);
+            ClassicAssert.AreEqual("b", result2);
         }
 
         [Test]
@@ -92,7 +93,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             // assert
             byte[] resultBytes2 = catalogue.Pop(1, 1); // b
             string result2 = Encoding.ASCII.GetString(resultBytes2);
-            Assert.AreEqual("b", result2);
+            ClassicAssert.AreEqual("b", result2);
         }
     }
 }

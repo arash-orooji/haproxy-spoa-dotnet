@@ -1,6 +1,7 @@
 using System.Collections;
 using HAProxy.StreamProcessingOffload.Agent.Actions;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
 {
@@ -34,7 +35,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             ba.CopyTo(expected, 0);
 
             // assert
-            Assert.AreEqual(
+            ClassicAssert.AreEqual(
                 HelperMethods.ToBitString(expected),
                 HelperMethods.ToBitString(action.Bytes));
         }
