@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Sends allowed and malicious requests through HAProxy and checks the status codes.
-# Usage: ./test.sh [base-url]    (default: http://localhost:8080)
+# Usage: ./test.sh [base-url]    (default: http://localhost:3000)
 set -u
 
-BASE="${1:-http://localhost:8080}"
+BASE="${1:-http://localhost:3000}"
 UNSIGNED_JWT="eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAifQ."
 pass=0
 fail=0

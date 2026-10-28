@@ -71,7 +71,7 @@ docker compose down
 ```
 
 ```text
-$ curl -i --path-as-is 'http://localhost:8080/_layouts/15/ToolPane%252easpx'
+$ curl -i --path-as-is 'http://localhost:3000/_layouts/15/ToolPane%252easpx'
 HTTP/1.1 403 Forbidden
 x-spguard-rule: SP-TOOLSHELL-TOOLPANE
 content-type: text/plain
