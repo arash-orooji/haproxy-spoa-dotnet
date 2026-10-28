@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using HAProxy.StreamProcessingOffload.Agent;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
@@ -34,8 +35,8 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             TypedData result = TypedDataParser.ParseNext(buffer, ref offset);
 
             // assert
-            Assert.AreEqual(DataType.Binary, result.Type);
-            Assert.AreEqual("Zm9vPWJhcg==", result.ToString()); // base64 foo=bar
+            ClassicAssert.AreEqual(DataType.Binary, result.Type);
+            ClassicAssert.AreEqual("Zm9vPWJhcg==", result.ToString()); // base64 foo=bar
         }
         
         [Test]
@@ -54,8 +55,8 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             TypedData result = TypedDataParser.ParseNext(buffer, ref offset);
 
             // assert
-            Assert.AreEqual(DataType.Boolean, result.Type);
-            Assert.AreEqual(true, result.Value);
+            ClassicAssert.AreEqual(DataType.Boolean, result.Type);
+            ClassicAssert.AreEqual(true, result.Value);
         }
 
         [Test]
@@ -80,8 +81,8 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             TypedData result = TypedDataParser.ParseNext(buffer, ref offset);
 
             // assert
-            Assert.AreEqual(DataType.Int32, result.Type);
-            Assert.AreEqual(16380, result.Value);
+            ClassicAssert.AreEqual(DataType.Int32, result.Type);
+            ClassicAssert.AreEqual(16380, result.Value);
         }
 
         [Test]
@@ -106,8 +107,8 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             TypedData result = TypedDataParser.ParseNext(buffer, ref offset);
 
             // assert
-            Assert.AreEqual(DataType.Uint32, result.Type);
-            Assert.AreEqual(16380, result.Value);
+            ClassicAssert.AreEqual(DataType.Uint32, result.Type);
+            ClassicAssert.AreEqual(16380, result.Value);
         }
 
         [Test]
@@ -132,8 +133,8 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             TypedData result = TypedDataParser.ParseNext(buffer, ref offset);
 
             // assert
-            Assert.AreEqual(DataType.Ipv4, result.Type);
-            Assert.AreEqual("1.1.1.1", result.Value);
+            ClassicAssert.AreEqual(DataType.Ipv4, result.Type);
+            ClassicAssert.AreEqual("1.1.1.1", result.Value);
         }
 
         [Test]
@@ -171,8 +172,8 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             TypedData result = TypedDataParser.ParseNext(buffer, ref offset);
 
             // assert
-            Assert.AreEqual(DataType.Ipv6, result.Type);
-            Assert.AreEqual("FC00:0000:0000:0000:0000:0000:0000:0020", result.Value);
+            ClassicAssert.AreEqual(DataType.Ipv6, result.Type);
+            ClassicAssert.AreEqual("FC00:0000:0000:0000:0000:0000:0000:0020", result.Value);
         }
 
         [Test]
@@ -198,8 +199,8 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             TypedData result = TypedDataParser.ParseNext(buffer, ref offset);
 
             // assert
-            Assert.AreEqual(DataType.String, result.Type);
-            Assert.AreEqual("abc", result.Value);
+            ClassicAssert.AreEqual(DataType.String, result.Type);
+            ClassicAssert.AreEqual("abc", result.Value);
         }
     }
 }

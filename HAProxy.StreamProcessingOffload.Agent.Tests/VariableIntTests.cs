@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using HAProxy.StreamProcessingOffload.Agent;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
@@ -17,7 +18,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             VariableInt result = VariableInt.EncodeVariableInt(input);
 
             // assert
-            Assert.AreEqual(output, result.Value);
+            ClassicAssert.AreEqual(output, result.Value);
         }
 
         [TestCase(0, "00000000")]
@@ -29,7 +30,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             VariableInt result = VariableInt.EncodeVariableInt(input);
 
             // assert
-            Assert.AreEqual(output, HelperMethods.ToBitString(result.Bytes));
+            ClassicAssert.AreEqual(output, HelperMethods.ToBitString(result.Bytes));
         }
 
         [Test]
@@ -47,7 +48,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             VariableInt result = VariableInt.DecodeVariableInt(buffer);
 
             // assert
-            Assert.AreEqual(1000, result.Value);
+            ClassicAssert.AreEqual(1000, result.Value);
         }
 
         [TestCase(1, 1)]
@@ -59,7 +60,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             VariableInt result = VariableInt.EncodeVariableInt(input);
 
             // assert
-            Assert.AreEqual(length, result.Length);
+            ClassicAssert.AreEqual(length, result.Length);
         }
     }
 }

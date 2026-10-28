@@ -1,6 +1,6 @@
-# HAProxy Stream Processing Offload Agent (SPOA) for .NET Core
+# HAProxy Stream Processing Offload Agent (SPOA) for .NET
 
-The HAProxy [Stream Processing Offload Protocol](https://github.com/haproxy/haproxy/blob/master/doc/SPOE.txt) (SPOP) allows traffic data to be streamed to an external agent. This library allows you to write that agent using [.NET Core](https://dotnet.microsoft.com/learn/dotnet/what-is-dotnet).
+The HAProxy [Stream Processing Offload Protocol](https://github.com/haproxy/haproxy/blob/master/doc/SPOE.txt) (SPOP) allows traffic data to be streamed to an external agent. This library allows you to write that agent using [.NET](https://dotnet.microsoft.com/learn/dotnet/what-is-dotnet). The library targets **.NET 10**.
 
 For more information, read the blog post [Extending HAProxy with the Stream Processing Offload Engine](https://www.haproxy.com/blog/extending-haproxy-with-the-stream-processing-offload-engine/).
 
@@ -28,9 +28,9 @@ PS> Install-Package HAProxy.StreamProcessingOffload.Agent -Version 1.0.5
 
 ## Usage
 
-1. Download and install the [.NET Core SDK](https://dotnet.microsoft.com/download).
+1. Download and install the [.NET 10 SDK](https://dotnet.microsoft.com/download).
 2. Create a new folder and `cd` into it.
-3. Create a new .NET Core project:
+3. Create a new .NET project:
 ```
 $ dotnet new console
 ```
@@ -208,11 +208,16 @@ backend servers
    server s1 127.0.0.1:8080 check maxconn 30
 
 backend be_agents
-   mode tcp
+   mode spop
    balance roundrobin
-   option spop-check
    server agent1 127.0.0.1:12345 check  inter 10s  maxconn 30
 ```
+
+HAProxy 3.1 and later use `mode spop` for SPOE agent backends. On older versions, use `mode tcp` with `option spop-check`.
+
+## SharePoint Guard
+
+The [SharePointGuard](SharePointGuard/) project is a ready-to-run agent built on this library. It blocks sensitive and commonly exploited endpoints of SharePoint Server Subscription Edition, for example ToolShell (`ToolPane.aspx`), Central Administration, the legacy enumeration services and unsigned-JWT authentication bypass. It comes with a Docker Compose setup and a test script; see [SharePointGuard/README.md](SharePointGuard/README.md).
 
 ## Building and Testing
 

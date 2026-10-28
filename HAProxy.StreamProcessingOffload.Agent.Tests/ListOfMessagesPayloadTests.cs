@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using HAProxy.StreamProcessingOffload.Agent.Payloads;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
 {
@@ -51,10 +52,10 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
 
             // assert
             SpoeMessage spoeMessage = messagesPayload.Messages.FirstOrDefault();
-            Assert.AreEqual("check-client-ip", spoeMessage.Name);
-            Assert.AreEqual(1, spoeMessage.Args.Count);
-            Assert.AreEqual("ip", spoeMessage.Args.First().Key);
-            Assert.AreEqual("192.168.50.1", spoeMessage.Args.First().Value.Value);
+            ClassicAssert.AreEqual("check-client-ip", spoeMessage.Name);
+            ClassicAssert.AreEqual(1, spoeMessage.Args.Count);
+            ClassicAssert.AreEqual("ip", spoeMessage.Args.First().Key);
+            ClassicAssert.AreEqual("192.168.50.1", spoeMessage.Args.First().Value.Value);
         }
 
         [Test]
@@ -99,7 +100,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             ba.CopyTo(expected, 0);
 
             // assert
-            Assert.AreEqual(
+            ClassicAssert.AreEqual(
                 HelperMethods.ToBitString(expected),
                 HelperMethods.ToBitString(messagesPayload.Bytes));
         }

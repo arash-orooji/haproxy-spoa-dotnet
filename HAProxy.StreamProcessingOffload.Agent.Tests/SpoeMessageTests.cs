@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
 {
@@ -20,7 +21,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             var name = this.message.Name;
 
             // assert
-            Assert.AreEqual("test", name);
+            ClassicAssert.AreEqual("test", name);
         }
 
         [Test]
@@ -33,7 +34,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             var arg = this.message.Args["testkey"];
 
             // assert
-            Assert.AreEqual("testData", arg.Value);
+            ClassicAssert.AreEqual("testData", arg.Value);
         }
     }
 }

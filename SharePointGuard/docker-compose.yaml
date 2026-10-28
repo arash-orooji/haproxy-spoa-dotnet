@@ -1,0 +1,18 @@
+services:
+  agent:
+    build:
+      context: ..
+      dockerfile: SharePointGuard/Dockerfile
+    image: sharepoint-guard-spoa:latest
+    environment:
+      SPGUARD_PORT: "12345"
+      SPGUARD_DEBUG: "false"
+
+  haproxy:
+    image: haproxytech/haproxy-alpine:3.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./haproxy/:/usr/local/etc/haproxy:ro"
+    depends_on:
+      - agent

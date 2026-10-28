@@ -1,0 +1,95 @@
+{
+  // Paths are matched AFTER normalization: percent-decoded (up to 3 passes),
+  // backslashes turned into '/', "." and ".." resolved, trailing dots/spaces
+  // removed from each segment, and lower-cased. Patterns use "(^|/)" instead of
+  // "^" so that site-relative URLs (/sites/hr/_layouts/15/...) are covered too.
+  //
+  // "allowFrom" lists CIDR ranges that are exempt from a rule, e.g. your admin
+  // or internal networks: "allowFrom": [ "10.0.0.0/8" ]
+
+  // CVE-2023-29357: unsigned JWT ("alg": "none") in Authorization / X-PROOF_TOKEN.
+  "blockUnsignedJwt": true,
+
+  "rules": [
+    {
+      "id": "SP-TOOLSHELL-SIGNOUT-REFERER",
+      "description": "Authentication bypass via spoofed SignOut.aspx Referer (ToolShell, CVE-2025-49706 / CVE-2025-53771)",
+      "methods": [ "POST", "PUT", "PATCH", "MERGE", "DELETE" ],
+      "path": "^(?!.*(^|/)_layouts/(\\d+/)?signout\\.aspx$)",
+      "referer": "(^|/)_layouts/(\\d+/)?signout\\.aspx"
+    },
+    {
+      "id": "SP-TOOLSHELL-TOOLPANE",
+      "description": "ToolPane.aspx deserialization RCE (ToolShell, CVE-2025-49704 / CVE-2025-53770)",
+      "path": "(^|/)_layouts/(\\d+/)?toolpane\\.aspx"
+    },
+    {
+      "id": "SP-TOOLSHELL-WEBSHELL",
+      "description": "Known ToolShell web shell (spinstall*.aspx) in the LAYOUTS folder",
+      "path": "(^|/)_layouts/(\\d+/)?spinstall[^/]*\\.aspx"
+    },
+    {
+      "id": "SP-CENTRAL-ADMIN",
+      "description": "Central Administration / administrative web services must not be reachable from outside",
+      "path": "(^|/)(_admin|_vti_adm)(/|$)",
+      "allowFrom": []
+    },
+    {
+      "id": "SP-PICKER-DESERIALIZATION",
+      "description": "Picker.aspx deserialization RCE (CVE-2019-0604)",
+      "path": "(^|/)_layouts/(\\d+/)?picker\\.aspx"
+    },
+    {
+      "id": "SP-QUICKLINKS-DATASET",
+      "description": "QuickLinks DataSet deserialization RCE (CVE-2020-1147)",
+      "path": "(^|/)_layouts/(\\d+/)?quicklinks(dialogform)?\\.aspx"
+    },
+    {
+      "id": "SP-BDC-METADATA",
+      "description": "BDC metadata model upload / code injection (CVE-2023-24955)",
+      "path": "(\\.bdcm$|businessdatametadatacatalog)"
+    },
+    {
+      "id": "SP-SITE-ADMIN-PAGES",
+      "description": "Site administration and permission pages",
+      "path": "(^|/)_layouts/(\\d+/)?(user|people|aclinv|mngsiteadmin|settings|viewlsts|mngsubwebs|role|editprms|addrole|groups|siteadmin|managefeatures|policy)\\.aspx",
+      "allowFrom": []
+    },
+    {
+      "id": "SP-LEGACY-SOAP-ENUM",
+      "description": "Legacy SOAP services used for user, permission and topology enumeration",
+      "path": "(^|/)_vti_bin/(usergroup|people|permissions|sitedata|sites|webs|admin|webpartpages|dspsts|spsearch|search|authentication)\\.asmx"
+    },
+    {
+      "id": "SP-SERVICE-DISCOVERY",
+      "description": "Web service discovery and WSDL disclosure",
+      "path": "(^|/)_vti_bin/.+\\.(asmx|svc)$",
+      "query": "(^|&)(wsdl|disco)(=|&|$)"
+    },
+    {
+      "id": "SP-SPDISCO",
+      "description": "SharePoint service discovery document",
+      "path": "(^|/)_vti_bin/spdisco\\.aspx"
+    },
+    {
+      "id": "SP-FRONTPAGE-RPC",
+      "description": "FrontPage Server Extensions RPC and metadata disclosure",
+      "path": "((^|/)_vti_bin/(_vti_aut/author\\.dll|_vti_adm/admin\\.dll|shtml\\.dll)|(^|/)_vti_pvt(/|$)|(^|/)_vti_inf\\.html$)"
+    },
+    {
+      "id": "SP-REST-USER-ENUM",
+      "description": "User and group enumeration through the REST API",
+      "path": "(^|/)(_api|_vti_bin/client\\.svc)/web/(siteusers|sitegroups|roleassignments|siteuserinfolist)"
+    },
+    {
+      "id": "SP-LISTDATA-ODATA",
+      "description": "Legacy ListData.svc OData endpoint (bulk list/user data export)",
+      "path": "(^|/)_vti_bin/listdata\\.svc"
+    },
+    {
+      "id": "SP-USER-INFO-LIST",
+      "description": "Hidden User Information List",
+      "path": "(^|/)_catalogs/users(/|$)"
+    }
+  ]
+}

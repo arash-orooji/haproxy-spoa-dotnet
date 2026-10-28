@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
 {
@@ -27,7 +28,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             flags.Fin = true;
 
             // assert
-            Assert.AreEqual(expectedBytesString, HelperMethods.ToBitString(flags.Bytes));
+            ClassicAssert.AreEqual(expectedBytesString, HelperMethods.ToBitString(flags.Bytes));
         }
 
         [Test]
@@ -51,7 +52,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             flags.Abort = true;
 
             // assert
-            Assert.AreEqual(expectedBytesString, HelperMethods.ToBitString(flags.Bytes));
+            ClassicAssert.AreEqual(expectedBytesString, HelperMethods.ToBitString(flags.Bytes));
         }
     }
 }

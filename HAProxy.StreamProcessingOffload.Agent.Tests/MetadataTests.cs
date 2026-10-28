@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HAProxy.StreamProcessingOffload.Agent.Tests
 {
@@ -29,7 +30,7 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             ba.CopyTo(expected, 0);
 
             // assert
-            Assert.AreEqual(
+            ClassicAssert.AreEqual(
                 HelperMethods.ToBitString(expected),
                 HelperMethods.ToBitString(metadata.Bytes));
         }
@@ -60,11 +61,11 @@ namespace HAProxy.StreamProcessingOffload.Agent.Tests
             metadata.Parse(buffer, ref offset);
 
             // assert
-            Assert.IsTrue(metadata.Flags.Fin);
-            Assert.IsFalse(metadata.Flags.Abort);
-            Assert.AreEqual(11, metadata.StreamId.Value);
-            Assert.AreEqual(1, metadata.FrameId.Value);
-            Assert.AreEqual(6, offset);
+            ClassicAssert.IsTrue(metadata.Flags.Fin);
+            ClassicAssert.IsFalse(metadata.Flags.Abort);
+            ClassicAssert.AreEqual(11, metadata.StreamId.Value);
+            ClassicAssert.AreEqual(1, metadata.FrameId.Value);
+            ClassicAssert.AreEqual(6, offset);
         }
     }
 }
